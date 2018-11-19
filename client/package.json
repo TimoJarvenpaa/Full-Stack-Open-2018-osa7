@@ -1,0 +1,40 @@
+{
+  "name": "blogilista-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.17.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
+    "react-scripts": "^2.1.1",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "fix": "eslint . --fix"
+  },
+  "proxy": "http://localhost:3003",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "eslint": "^5.6.0",
+    "eslint-config-react-app": "^3.0.5",
+    "eslint-plugin-jest": "^22.0.0",
+    "eslint-plugin-react": "^7.11.1"
+  }
+}

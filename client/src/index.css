@@ -1,0 +1,38 @@
+.notification {
+  color: black;
+  background: lightgreen;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.errorNotification {
+  color: black;
+  background: lightcoral;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.blueButton {
+  background-color:lightskyblue;
+  border: none;
+  border-radius: 12px;
+  color: black;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  outline: none;
+}
+
+.blueButton:hover {background-color: lightcoral}
+
+.blueButton:active {
+  transform: translateY(2px);
+}
