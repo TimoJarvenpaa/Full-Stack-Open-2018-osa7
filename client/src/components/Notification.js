@@ -3,19 +3,12 @@ import { connect } from 'react-redux'
 
 class Notification extends React.Component {
   render() {
-    const style = {
-      border: 'solid',
-      padding: 10,
-      borderWidth: 1
-    }
-    const { notifications } = this.props
-
-    if (notifications === null) {
+    if (this.props.notifications === null) {
       return null
     }
     return (
       <div className='notification'>
-        {notifications}
+        {this.props.notifications}
       </div>
     )
   }
