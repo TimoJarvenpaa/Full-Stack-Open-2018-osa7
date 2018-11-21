@@ -11,6 +11,7 @@ import { initializeBlogs } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/userReducer'
 import { setUser, logout } from './reducers/loginReducer'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import SingleBlogView from './components/SingleBlogView';
 
 class App extends React.Component {
   constructor(props) {
@@ -40,7 +41,9 @@ class App extends React.Component {
         <h2>Blog list application</h2>
         <p>{this.props.user.name} is currently logged in </p>
         <button onClick={() => this.props.logout()}>logout</button>
-        <BlogForm />
+        <Togglable buttonLabel="create new">
+          <BlogForm />
+        </Togglable>
         <BlogList />
       </div>
     )
@@ -58,7 +61,7 @@ class App extends React.Component {
       </div>
     )
 
-    const UserPage = ({ match }) => (
+    const UserView = ({ match }) => (
       <div>
         <Notification />
         <h2>Blog list application</h2>
@@ -72,6 +75,21 @@ class App extends React.Component {
     )
 
     const userById = (id) => this.props.users.find(user => user.id === id)
+
+    const BlogView = ({ match, history }) => (
+      <div>
+        <Notification />
+        <h2>Blog list application</h2>
+        <p>{this.props.user.name} is currently logged in </p>
+        <button onClick={() => this.props.logout()}>logout</button>
+        <Togglable buttonLabel="create new">
+          <BlogForm />
+        </Togglable>
+        <SingleBlogView blog={blogById(match.params.id)} history={history} />
+      </div>
+    )
+
+    const blogById = (id) => this.props.blogs.find(blog => blog.id === id)
 
     if (this.props.user === null) {
       return (
@@ -91,7 +109,10 @@ class App extends React.Component {
             <Route exact path="/" render={() => <Home />} />
             <Route exact path="/users" render={() => <Users />} />
             <Route exact path="/users/:id" render={({ match }) =>
-              <UserPage match={match} />}
+              <UserView match={match} />}
+            />
+            <Route exact path="/blogs/:id" render={({ match, history }) =>
+              <BlogView match={match} history={history} />}
             />
           </div>
         </Router>
@@ -103,7 +124,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    users: state.users
+    users: state.users,
+    blogs: state.blogs
   }
 }
 

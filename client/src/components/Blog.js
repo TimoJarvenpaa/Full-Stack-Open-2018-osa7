@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeBlog, removeBlog } from '../reducers/blogReducer'
+import { Link } from 'react-router-dom'
 
 class Blog extends React.Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class Blog extends React.Component {
           <a href={this.props.blog.url}>{this.props.blog.url}</a>
           <div>
             has {this.props.blog.likes}
-            <button onClick={() => this.props.likeBlog(this.props.blog)}>vote</button>
+            <button onClick={() => this.props.likeBlog(this.props.blog)}>like</button>
           </div>
           <div>added by {this.props.blog.user.name}</div>
           <button style={{ display: (this.props.blog.user._id === this.props.user.id || this.props.blog.user === null) ? '' : 'none' }}
@@ -56,8 +57,8 @@ class Blog extends React.Component {
     }
 
     return (
-      <div onClick={this.toggleInfo} style={blogStyle} className='fullInfo'>
-        <div>{this.props.blog.title} by {this.props.blog.author}</div>
+      <div onClick={this.toggleInfo} style={blogStyle} className='defaultInfo'>
+        <div><Link to={`/blogs/${this.props.blog.id}`}>{this.props.blog.title} by {this.props.blog.author}</Link></div>
       </div>
     )
   }
