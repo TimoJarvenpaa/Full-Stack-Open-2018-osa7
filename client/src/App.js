@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/userReducer'
 import { setUser, logout } from './reducers/loginReducer'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import SingleBlogView from './components/SingleBlogView';
 
 class App extends React.Component {
@@ -35,12 +35,37 @@ class App extends React.Component {
 
   render() {
 
+    const NavMenu = () => {
+      const menuStyle = {
+        borderColor: 'black',
+        borderStyle: 'solid',
+        display: 'inline-block',
+        padding: 10
+      }
+
+      return (
+        <div>
+          <h2>Blog list application</h2>
+          <div style={menuStyle}>
+            <NavLink exact to="/">blogs</NavLink> &nbsp;
+          <NavLink exact to="/users">users</NavLink> &nbsp;
+          {this.props.user
+              ?
+              <span>
+                <em>{this.props.user.name} is logged in</em> &nbsp;
+                <button onClick={() => this.props.logout()}>logout</button>
+              </span>
+              : <NavLink to="/login">login</NavLink>
+            }
+          </div>
+        </div>
+      )
+    }
+
     const Home = () => (
       <div>
+        <NavMenu />
         <Notification />
-        <h2>Blog list application</h2>
-        <p>{this.props.user.name} is currently logged in </p>
-        <button onClick={() => this.props.logout()}>logout</button>
         <Togglable buttonLabel="create new">
           <BlogForm />
         </Togglable>
@@ -50,10 +75,8 @@ class App extends React.Component {
 
     const Users = () => (
       <div>
+        <NavMenu />
         <Notification />
-        <h2>Blog list application</h2>
-        <p>{this.props.user.name} is currently logged in </p>
-        <button onClick={() => this.props.logout()}>logout</button>
         <Togglable buttonLabel="create new">
           <BlogForm />
         </Togglable>
@@ -63,10 +86,8 @@ class App extends React.Component {
 
     const UserView = ({ match }) => (
       <div>
+        <NavMenu />
         <Notification />
-        <h2>Blog list application</h2>
-        <p>{this.props.user.name} is currently logged in </p>
-        <button onClick={() => this.props.logout()}>logout</button>
         <Togglable buttonLabel="create new">
           <BlogForm />
         </Togglable>
@@ -78,10 +99,8 @@ class App extends React.Component {
 
     const BlogView = ({ match, history }) => (
       <div>
+        <NavMenu />
         <Notification />
-        <h2>Blog list application</h2>
-        <p>{this.props.user.name} is currently logged in </p>
-        <button onClick={() => this.props.logout()}>logout</button>
         <Togglable buttonLabel="create new">
           <BlogForm />
         </Togglable>
