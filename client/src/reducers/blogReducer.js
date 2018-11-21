@@ -8,6 +8,11 @@ const reducer = (state = [], action) => {
       const liked = state.find(b => b.id === action.id)
       return [...old, { ...liked, likes: liked.likes + 1 }]
     }
+    case 'COMMENT': {
+      const old = state.filter(b => b.id !== action.id)
+      const commented = state.find(b => b.id === action.id)
+      return [...old, { ...commented, comments: commented.comments.concat(action.comment) }]
+    }
     case 'CREATE':
       return [...state, action.data]
     case 'REMOVE': {
@@ -50,6 +55,18 @@ export const likeBlog = (blog) => {
       id: liked.id
     })
     dispatch(notify(`You liked '${liked.title}'`, 5))
+  }
+}
+
+export const addComment = (id, comment) => {
+  return async (dispatch) => {
+    await blogService.comment(id, comment)
+    dispatch({
+      type: 'COMMENT',
+      id,
+      comment
+    })
+    dispatch(notify(`comment '${comment}'`, 5))
   }
 }
 

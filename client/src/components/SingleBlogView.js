@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { likeBlog, removeBlog } from '../reducers/blogReducer'
+import CommentForm from './CommentForm'
 
 class SingleBlogView extends React.Component {
 
@@ -27,7 +28,15 @@ class SingleBlogView extends React.Component {
         </div>
         <div>added by {this.props.blog.user.name}</div>
         <button style={{ display: (this.props.blog.user._id === this.props.user.id || this.props.blog.user === null) ? '' : 'none' }}
-            className='blueButton' onClick={() => this.removeBlog(this.props.blog)}>delete</button>
+          className='blueButton' onClick={() => this.removeBlog(this.props.blog)}>delete</button>
+        <h3>comments</h3>
+        <CommentForm blog={this.props.blog} />
+        <ul>
+          {this.props.blog.comments.map(comment =>
+            <li key={comment}>{comment}</li>
+          )}
+        </ul>
+
       </div>
     )
   }
