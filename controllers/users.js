@@ -17,6 +17,21 @@ usersRouter.get('/', async (request, response) => {
   }
 })
 
+usersRouter.get('/:id', async (request, response) => {
+  try {
+    const user = await User
+      .findOne({ _id: request.params.id })
+      .populate('blogs', { likes: 1, author: 1, title: 1, url: 1 })
+
+    response.json(User.format(user))
+  } catch (exception) {
+    console.log(exception)
+    response.status(500).json({
+      error: 'something went wrong...'
+    })
+  }
+})
+
 usersRouter.post('/', async (request, response) => {
   try {
     const body = request.body

@@ -5,6 +5,7 @@ import UserList from './components/UserList'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import Togglable from './components/Togglable'
+import User from './components/User'
 import { connect } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/userReducer'
@@ -20,8 +21,10 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.props.initializeBlogs()
-    this.props.initializeUsers()
+    await Promise.all([
+      this.props.initializeBlogs(),
+      this.props.initializeUsers()
+    ])
     const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -41,7 +44,7 @@ class App extends React.Component {
         <BlogList />
       </div>
     )
-    
+
     const Users = () => (
       <div>
         <Notification />
@@ -54,6 +57,21 @@ class App extends React.Component {
         <UserList />
       </div>
     )
+
+    const UserPage = ({ match }) => (
+      <div>
+        <Notification />
+        <h2>Blog list application</h2>
+        <p>{this.props.user.name} is currently logged in </p>
+        <button onClick={() => this.props.logout()}>logout</button>
+        <Togglable buttonLabel="create new">
+          <BlogForm />
+        </Togglable>
+        <User user={userById(match.params.id)} />
+      </div>
+    )
+
+    const userById = (id) => this.props.users.find(user => user.id === id)
 
     if (this.props.user === null) {
       return (
@@ -71,7 +89,10 @@ class App extends React.Component {
         <Router>
           <div>
             <Route exact path="/" render={() => <Home />} />
-            <Route path="/users" render={() => <Users />} />
+            <Route exact path="/users" render={() => <Users />} />
+            <Route exact path="/users/:id" render={({ match }) =>
+              <UserPage match={match} />}
+            />
           </div>
         </Router>
       </div>
@@ -81,7 +102,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    users: state.users
   }
 }
 

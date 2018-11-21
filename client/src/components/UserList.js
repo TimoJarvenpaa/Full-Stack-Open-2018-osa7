@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class UserList extends React.Component {
 
@@ -14,8 +15,8 @@ class UserList extends React.Component {
               <th>Blogs added</th>
             </tr>
             {this.props.users.map(user =>
-              <tr key={user.name}>
-                <td>{user.name}</td>
+              <tr key={user.id}>
+                <td><Link to={`/users/${user.id}`}>{user.name}</Link></td>
                 <td>{user.blogs.length}</td>
               </tr>
             )}
@@ -31,10 +32,6 @@ const mapStateToProps = (state) => {
     users: state.users
   }
 }
-
-// const mapDispatchToProps = {
-//   likeBlog
-// }
 
 export default connect(
   mapStateToProps,
