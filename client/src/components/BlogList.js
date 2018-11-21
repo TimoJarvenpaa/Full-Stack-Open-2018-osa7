@@ -5,10 +5,6 @@ import Blog from './Blog'
 
 class BlogList extends React.Component {
 
-  // handleClick = (blog) => async () => {
-  //   this.props.likeBlog(blog)
-  // }
-
   render() {
       return (
         <div>
