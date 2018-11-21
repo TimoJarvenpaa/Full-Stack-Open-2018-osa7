@@ -1,5 +1,6 @@
 import blogService from '../services/blogs'
 import { notify } from './notificationReducer'
+import { addBlogToUser } from './userReducer'
 
 const reducer = (state = [], action) => {
   switch (action.type) {
@@ -11,7 +12,7 @@ const reducer = (state = [], action) => {
     case 'COMMENT': {
       const old = state.filter(b => b.id !== action.id)
       const commented = state.find(b => b.id === action.id)
-      return [...old, { ...commented, comments: commented.comments.concat(action.comment) }]
+      return [...old, { ...commented, comments: commented.comments.concat(action.data) }]
     }
     case 'CREATE':
       return [...state, action.data]
@@ -33,6 +34,7 @@ export const createBlog = (blog) => {
       type: 'CREATE',
       data: newBlog
     })
+    dispatch(addBlogToUser(newBlog))
     dispatch(notify(`a new blog '${newBlog.title}' by ${newBlog.author} added`, 5))
   }
 }
@@ -64,9 +66,9 @@ export const addComment = (id, comment) => {
     dispatch({
       type: 'COMMENT',
       id,
-      comment
+      data: comment
     })
-    dispatch(notify(`comment '${comment}'`, 5))
+    dispatch(notify(`comment '${comment.comment}'`, 5))
   }
 }
 

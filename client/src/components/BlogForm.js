@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
+import { Form, Button } from 'semantic-ui-react'
 
 class BlogForm extends React.Component {
 
@@ -24,30 +25,30 @@ class BlogForm extends React.Component {
     return (
       <div>
         <h2>Create new</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            title:
-          <input
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <label>title:</label>
+            <input
               type="text"
               name="title"
             />
-          </div>
-          <div>
-            author:
-          <input
+          </Form.Field>
+          <Form.Field>
+            <label>author:</label>
+            <input
               type="text"
               name="author"
             />
-          </div>
-          <div>
-            url:
-          <input
+          </Form.Field>
+          <Form.Field>
+            <label>url:</label>
+            <input
               type="text"
               name="url"
             />
-          </div>
-          <button type="submit">create</button>
-        </form>
+          </Form.Field>
+          <Button type="submit">create</Button>
+        </Form>
       </div>
     )
   }

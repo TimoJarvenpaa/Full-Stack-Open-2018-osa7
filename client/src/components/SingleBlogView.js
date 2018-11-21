@@ -32,8 +32,8 @@ class SingleBlogView extends React.Component {
         <h3>comments</h3>
         <CommentForm blog={this.props.blog} />
         <ul>
-          {this.props.blog.comments.map(comment =>
-            <li key={comment}>{comment}</li>
+          {this.props.blog.comments.map(c =>
+            <li key={c.comment}>{c.comment}</li>
           )}
         </ul>
 

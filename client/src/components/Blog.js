@@ -36,7 +36,9 @@ class Blog extends React.Component {
       paddingBottom: 2,
       border: 'solid',
       borderWidth: 1,
-      marginBottom: 5
+      marginBottom: 5,
+      borderRadius: 5,
+      backgroundColor: '#ffffcc'
     }
 
     if (this.state.displayMoreInfo) {

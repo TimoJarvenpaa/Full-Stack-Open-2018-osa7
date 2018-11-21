@@ -3,8 +3,9 @@ import { mount } from 'enzyme'
 import App from './App'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
-jest.mock('./services/blogs')
 import blogService from './services/blogs'
+jest.mock('./services/blogs')
+
 
 describe.only('<App />', () => {
   let app

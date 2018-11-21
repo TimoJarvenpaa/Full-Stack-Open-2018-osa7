@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../reducers/loginReducer'
+import { Form, Button } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
 
@@ -22,22 +23,22 @@ class LoginForm extends React.Component {
       <div>
         <h2>Log in to the application</h2>
 
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            username:
-          <input
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <label>username:</label>
+            <input
               name="username"
             />
-          </div>
-          <div>
-            password:
-          <input
+          </Form.Field>
+          <Form.Field>
+            <label>password:</label>
+            <input
               type="password"
               name="password"
             />
-          </div>
-          <button type="submit">login</button>
-        </form>
+          </Form.Field>
+          <Button type="submit">login</Button>
+        </Form>
       </div>
     )
   }
