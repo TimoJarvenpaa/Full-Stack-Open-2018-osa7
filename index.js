@@ -9,7 +9,7 @@ const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const config = require('./utils/config')
-//const path = require('path')
+const path = require('path')
 
 mongoose
   .connect(config.mongoUrl, {
@@ -24,7 +24,7 @@ mongoose
 
 app.use(cors())
 app.use(bodyParser.json())
-//app.use(express.static(path.join(__dirname, '/client/build')))
+app.use(express.static(path.join(__dirname, '/client/build')))
 app.use(middleware.logger)
 app.use(middleware.tokenExtractor)
 
